@@ -100,7 +100,6 @@
       font-size: 0.9em;
       position: relative; 
     }
-
     .footer p {
       position: absolute; 
       bottom: 20px;      
@@ -174,8 +173,6 @@
       border-radius: 5px;
       margin-top: 10px;
       transition: transform 0.3s ease, opacity 0.3s ease;
-      float: left; /* Demonstration for float */
-      margin-right: 10px;
     }
     .project img:hover {
       transform: scale(1.05);
@@ -186,50 +183,67 @@
       width: 100%;
       border-radius: 8px;
     }
-
-    /* Responsive Design */
     @media (max-width: 480px) {
       .grid-container {
         grid-template-areas:
           "header"
-          "main"
           "sidebar"
+          "main"
           "footer";
         grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr auto auto;
+        grid-template-rows: auto auto 1fr auto;
       }
-
       .sidebar {
         flex-direction: row;
-        overflow-x: auto;
-        justify-content: space-around;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
         position: static;
       }
-      
+
+      .sidebar ul {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        justify-content: center;
+      }
+
+      .sidebar li {
+        margin: 0;
+        padding: 5px 8px;
+        font-size: 0.85em;
+      }
       .resume-btn {
         position: static;
-        margin-top: 10px;
+        margin-left: 10px;
+        padding: 8px 12px;
+        font-size: 0.8em;
       }
 
       .projects-grid {
         grid-template-columns: 1fr;
       }
-    }
 
+      section {
+        padding: 15px;
+      }
+
+      h2 {
+        font-size: 1.2em;
+      }
+
+      p, td, th {
+        font-size: 0.9em;
+      }
+    }
     @media (max-width: 768px) {
       .grid-container {
-        grid-template-columns: 200px 1fr;
+        grid-template-columns: 150px 1fr;
       }
-      
-      .sidebar {
-        padding: 10px;
-      }
-
       .projects-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
-
     @media (min-width: 1024px) {
       .projects-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -249,7 +263,6 @@
       z-index: 2000;
       background: transparent;
     }
-
     @keyframes spin {
       0% { transform: translate(-50%, -50%) rotate(0deg); }
       100% { transform: translate(-50%, -50%) rotate(360deg); }
@@ -274,11 +287,10 @@
         <button class="resume-btn">Download Resume</button>
       </a>
     </nav>
-
     <main class="main">
       <section id="summary">
         <h2>Summary</h2>
-        <p>Informatics major here at NAU. Passionate about technology, problem-solving, and building practical solutions through software.</p>
+        <p>Informatics major at NAU. Passionate about technology, problem-solving, and building practical solutions through software.</p>
       </section>
       <section id="education">
         <h2>Education</h2>
@@ -295,7 +307,6 @@
           </tr>
         </table>
       </section>
-
       <section id="experience">
         <h2>Experience</h2>
         <table>
@@ -311,7 +322,6 @@
           </tr>
         </table>
       </section>
-
       <section id="skills">
         <h2>Skills</h2>
         <div class="skills-container">
@@ -325,12 +335,13 @@
           <div>Innovative Thinking</div>
         </div>
       </section>
+
       <section id="projects">
         <h2>Projects</h2>
         <div class="projects-grid">
           <div class="project">
             <h3>Portfolio Website</h3>
-            <p>Developed a personal portfolio website to showcase my projects and skills for CS212.</p>
+            <p>Developed a personal portfolio website to showcase projects and skills.</p>
             <img src="projects.jpg" alt="Project screenshot">
           </div>
           <div class="project">
@@ -357,6 +368,7 @@
         </iframe>
       </section>
     </main>
+
     <footer class="footer" id="contact">
       <p>Email: <a href="mailto:mk2487@nau.edu" style="color:#4CAF50;">mk2487@nau.edu</a> | 
          Phone: <a href="tel:808-276-8613" style="color:#4CAF50;">808-276-8613</a> | 
@@ -364,10 +376,11 @@
       </p>
     </footer>
   </div>
+
   <script>
     window.addEventListener("load", () => {
       document.getElementById("spinner").style.display = "none";
     });
   </script>
 </body>
-</html>
+</html>e.com/file/d/1vlo3JDYiwd0
