@@ -21,7 +21,7 @@
         "footer footer";
       grid-template-columns: 250px 1fr;
       grid-template-rows: 80px 1fr 80px;
-      height: 100vh;
+      min-height: 100vh;
     }
 
     .header {
@@ -30,31 +30,39 @@
       color: white;
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 1.8em;
+      justify-content: space-between;
+      font-size: 1.5em;
       font-weight: bold;
+      padding: 0 20px;
       position: sticky;
       top: 0;
       z-index: 1000;
+    }
+    .hamburger {
+      display: none;
+      font-size: 1.6em;
+      cursor: pointer;
     }
 
     .sidebar {
       grid-area: sidebar;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
       align-items: center;
       background: #333;
       color: white;
       padding: 20px;
       position: relative;
+      transition: left 0.3s ease;
     }
+
     .sidebar ul {
       list-style: none;
       padding: 0;
       margin: 0;
       width: 100%;
     }
+
     .sidebar li {
       margin: 12px 0;
       padding: 8px;
@@ -63,33 +71,30 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-    .sidebar li:hover {
-      background: #444;
+    .sidebar li:hover { background: #444; }
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      display: block;
     }
-
     .resume-btn {
-      position: absolute;
-      bottom: 20px;
       background: #007BFF;
       color: white;
       padding: 12px 18px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s ease, border-radius 0.3s ease, box-shadow 0.3s ease;
+      transition: background-color 0.3s ease;
+      margin-top: 20px;
     }
     .resume-btn:hover {
       background-color: #0056b3;
-      border-radius: 20px;
-      box-shadow: 0px 6px 12px rgba(0,0,0,0.2);
     }
-
     .main {
       grid-area: main;
       overflow-y: auto;
       padding: 20px;
     }
-
     .footer {
       grid-area: footer;
       background: #222;
@@ -98,14 +103,8 @@
       align-items: center;
       justify-content: center;
       font-size: 0.9em;
-      position: relative; 
-    }
-    .footer p {
-      position: absolute; 
-      bottom: 20px;      
-      text-align: center; 
-      width: 100%;        
-      margin: 0;          
+      text-align: center;
+      padding: 10px;
     }
 
     section {
@@ -115,9 +114,8 @@
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    h2 {
-      color: #004677;
-    }
+
+    h2 { color: #004677; }
 
     table {
       width: 100%;
@@ -129,9 +127,7 @@
       padding: 10px;
       text-align: left;
     }
-    th {
-      background: #f2f2f2;
-    }
+    th { background: #f2f2f2; }
 
     .skills-container {
       display: flex;
@@ -143,11 +139,11 @@
       color: white;
       padding: 10px 15px;
       border-radius: 5px;
-      transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
       cursor: pointer;
     }
     .skills-container div:hover {
-      transform: scale(1.1) rotate(-2deg);
+      transform: scale(1.1);
       background-color: #0066aa;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
@@ -163,11 +159,8 @@
       padding: 15px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       transition: transform 0.3s;
-      overflow: hidden;
     }
-    .project:hover {
-      transform: translateY(-5px);
-    }
+    .project:hover { transform: translateY(-5px); }
     .project img {
       max-width: 100%;
       border-radius: 5px;
@@ -179,75 +172,35 @@
       opacity: 0.9;
     }
 
-    iframe {
-      width: 100%;
-      border-radius: 8px;
-    }
-    @media (max-width: 480px) {
+    iframe { width: 100%; border-radius: 8px; }
+    @media (max-width: 768px) {
       .grid-container {
         grid-template-areas:
           "header"
-          "sidebar"
           "main"
           "footer";
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto 1fr auto;
+        grid-template-rows: auto 1fr auto;
       }
+      .hamburger { display: block; }
       .sidebar {
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        padding: 10px;
-        position: static;
+        position: fixed;
+        top: 80px;
+        left: -250px;
+        width: 200px;
+        height: calc(100% - 80px);
+        flex-direction: column;
+        padding: 20px;
+        z-index: 999;
       }
 
-      .sidebar ul {
-        display: flex;
-        flex-direction: row;
-        gap: 8px;
-        justify-content: center;
-      }
-
-      .sidebar li {
-        margin: 0;
-        padding: 5px 8px;
-        font-size: 0.85em;
-      }
-      .resume-btn {
-        position: static;
-        margin-left: 10px;
-        padding: 8px 12px;
-        font-size: 0.8em;
-      }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      section {
-        padding: 15px;
-      }
-
-      h2 {
-        font-size: 1.2em;
-      }
-
-      p, td, th {
-        font-size: 0.9em;
-      }
+      .sidebar.show { left: 0; }
     }
-    @media (max-width: 768px) {
-      .grid-container {
-        grid-template-columns: 150px 1fr;
-      }
-      .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    @media (min-width: 1024px) {
-      .projects-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
+
+    @media (max-width: 480px) {
+      h2 { font-size: 1.1em; }
+      p, td, th { font-size: 0.9em; }
+      .projects-grid { grid-template-columns: 1fr; }
     }
     #spinner {
       position: fixed;
@@ -261,8 +214,8 @@
       animation: spin 1s linear infinite;
       transform: translate(-50%, -50%);
       z-index: 2000;
-      background: transparent;
     }
+
     @keyframes spin {
       0% { transform: translate(-50%, -50%) rotate(0deg); }
       100% { transform: translate(-50%, -50%) rotate(360deg); }
@@ -272,16 +225,19 @@
 <body>
   <div id="spinner"></div>
   <div class="grid-container">
-    <header class="header">Marcell Kapas - Portfolio</header>
-    <nav class="sidebar">
+    <header class="header">
+      <span>Marcell Kapas - Portfolio</span>
+      <span class="hamburger" onclick="toggleMenu()">☰</span>
+    </header>
+    <nav class="sidebar" id="sidebar">
       <ul>
-        <li><a href="#summary" style="color:white; text-decoration:none;">Summary</a></li>
-        <li><a href="#education" style="color:white; text-decoration:none;">Education</a></li>
-        <li><a href="#experience" style="color:white; text-decoration:none;">Experience</a></li>
-        <li><a href="#skills" style="color:white; text-decoration:none;">Skills</a></li>
-        <li><a href="#projects" style="color:white; text-decoration:none;">Projects</a></li>
-        <li><a href="#contact" style="color:white; text-decoration:none;">Contact</a></li>
-        <li><a href="#video" style="color:white; text-decoration:none;">Intro Video</a></li>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#video">Intro Video</a></li>
       </ul>
       <a href="https://drive.google.com/file/d/1vlo3JDYiwd0hd0X4Jn9nS0Nye90zkOhF/view?usp=sharing" target="_blank">
         <button class="resume-btn">Download Resume</button>
@@ -295,31 +251,15 @@
       <section id="education">
         <h2>Education</h2>
         <table>
-          <tr>
-            <th>Institution</th>
-            <th>Degree/Field</th>
-            <th>Duration</th>
-          </tr>
-          <tr>
-            <td>Northern Arizona University</td>
-            <td>Bachelor of Science in Informatics</td>
-            <td>2023 - Present</td>
-          </tr>
+          <tr><th>Institution</th><th>Degree/Field</th><th>Duration</th></tr>
+          <tr><td>Northern Arizona University</td><td>Bachelor of Science in Informatics</td><td>2023 - Present</td></tr>
         </table>
       </section>
       <section id="experience">
         <h2>Experience</h2>
         <table>
-          <tr>
-            <th>Classes / Experience</th>
-            <th>Role</th>
-            <th>Duration</th>
-          </tr>
-          <tr>
-            <td>CS 105, 126, 136, 200, 205, 212, 305</td>
-            <td>Informatics Student</td>
-            <td>2023 - Present</td>
-          </tr>
+          <tr><th>Classes / Experience</th><th>Role</th><th>Duration</th></tr>
+          <tr><td>CS 105, 126, 136, 200, 205, 212, 305</td><td>Informatics Student</td><td>2023 - Present</td></tr>
         </table>
       </section>
       <section id="skills">
@@ -335,7 +275,6 @@
           <div>Innovative Thinking</div>
         </div>
       </section>
-
       <section id="projects">
         <h2>Projects</h2>
         <div class="projects-grid">
@@ -351,36 +290,30 @@
           </div>
           <div class="project">
             <h3>Contact Page</h3>
-            <p>Designed a styled contact form page with CSS layout techniques.</p>
+            <p>Designed a contact form page with CSS layout techniques.</p>
             <img src="contactpic.png" alt="Contact section screenshot">
           </div>
         </div>
       </section>
       <section id="video">
         <h2>Introduction Video</h2>
-        <p>A short video introducing myself and my professional goals.</p>
-        <iframe height="400" 
-          src="https://www.youtube.com/embed/IjEmCxRWBRc" 
-          title="Intro Video"
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen>
-        </iframe>
+        <iframe height="300" src="https://www.youtube.com/embed/IjEmCxRWBRc" title="Intro Video" frameborder="0" allowfullscreen></iframe>
       </section>
     </main>
-
     <footer class="footer" id="contact">
-      <p>Email: <a href="mailto:mk2487@nau.edu" style="color:#4CAF50;">mk2487@nau.edu</a> | 
-         Phone: <a href="tel:808-276-8613" style="color:#4CAF50;">808-276-8613</a> | 
-         GitHub: <a href="https://github.com/mk2487" style="color:#4CAF50;">github.com/mk2487</a> | 
-      </p>
+      <p>Email: <a href="mailto:mk2487@nau.edu">mk2487@nau.edu</a> | 
+         Phone: <a href="tel:808-276-8613">808-276-8613</a> | 
+         GitHub: <a href="https://github.com/mk2487">github.com/mk2487</a></p>
     </footer>
   </div>
-
   <script>
     window.addEventListener("load", () => {
       document.getElementById("spinner").style.display = "none";
     });
+
+    function toggleMenu() {
+      document.getElementById("sidebar").classList.toggle("show");
+    }
   </script>
 </body>
-</html>e.com/file/d/1vlo3JDYiwd0
+</html>
